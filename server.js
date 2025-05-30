@@ -30,7 +30,10 @@ app.use((req, res, next) => {
 // app.use(require('./routing/assignment1.routes'));
 // app.use(require('./routing/assignment2.routes'));
 // app.use(require('./routing/assignment3.routes'));
-app.use("/api", require('./routing/assignment4.routes'));
+// app.use("/api", require('./routing/assignment4.routes'));
+// app.use("/api", require('./routing/assignment5.route'));
+app.use("/api", require('./routing/studentMarks.routes'));
+
 
 
 app.listen(process.env.PORT, async()=>{

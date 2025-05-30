@@ -84,10 +84,31 @@ const Assignment4Controller ={
                 {
                     $lookup: {
                         from: "faculties",
-                        localField: "facultyId",
-                        foreignField: "_id",
+                        let: { facultyId: '$facultyId'},
+                        pipeline: [
+                            {
+                               $match:{
+                                $expr:{
+                                    $and:[
+                                        {
+                                          $eq: ["$isDeleted", false],  
+                                        },
+                                        {
+                                            $eq: ["$_id", "$$facultyId"],
+                                        }
+                                    ],
+                                }
+                               } 
+                            },
+                            {
+                               $project:{
+                                facultyName: 1,
+                                schoolId: 1,
+                               } 
+                            }
+                        ],
                         as: "facultyDetails",
-                    },
+                    }
                 },
                 {
                     $unwind: "$facultyDetails",
